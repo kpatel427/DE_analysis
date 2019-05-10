@@ -4,7 +4,7 @@ library(dplyr)
 library(data.table)
 
 #read in MYCN status
-mycn <- read.delim("2019-05-07-GSE49711-MYCN-status.txt", sep = "\t", header = T)
+mycn <- read.delim("dataset-MYCN-status.txt", sep = "\t", header = T)
 mycn <- mycn %>% column_to_rownames(var = "Sample_title")
 setnames(mycn,"mycn_status","Status")
 mycn$Status <- gsub(" Amplified","Amplified", mycn$Status)
@@ -14,7 +14,7 @@ mycn$Status <- as.factor(mycn$Status)
 
 
 # reading in the count data
-counts <- read.delim("GSE49711/GSE49711_SEQC_NB_MAV_G_log2.20121127.txt", sep = "\t")
+counts <- read.delim("data/dataset-count-matrix.txt", sep = "\t")
 new.counts <- counts[c(1:60778),c(1,10:507)]
 
 # calculating means for every row grouping by the gene; and selecting rows with max mean
