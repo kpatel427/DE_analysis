@@ -61,3 +61,13 @@ setnames(computed.values, " 1","amplified")
 
 setDT(computed.values)[,log2FC:= log2(computed.values$`non-amplified`/computed.values$amplified)]
   
+up <- computed.values %>%
+  filter(log2FC > 1 & log2FC != Inf)
+
+down <- computed.values %>%
+  filter(log2FC < -1 & log2FC != -Inf)
+
+write.table(up$X00gene_id, file = "up-regulated-GSE49711.txt", quote = F, row.names = F, col.names = F)
+write.table(down$X00gene_id, file = "down-regulated-GSE49711.txt", quote = F, row.names = F, col.names = F)
+
+
